@@ -1,0 +1,9 @@
+Import-Csv Credential_Scan_-_Cloud*.csv | Select-Object *,@{Name='Scan';Expression={'Azure'}} | Export-Csv AzureNEW.csv -NoTypeInformation
+Import-Csv Credential_Scan_-_CPFS*.csv | Select-Object *,@{Name='Scan';Expression={'CPFS'}} | Export-Csv CPFSNEW.csv -NoTypeInformation
+Import-Csv Credential_Scan_-_DSC-_Production*.csv | Select-Object *,@{Name='Scan';Expression={'DSC'}} | Export-Csv DSCNEW.csv -NoTypeInformation
+Import-Csv Credential_Scan_-_DSC-_DMZ*.csv | Select-Object *,@{Name='Scan';Expression={'DSC'}} | Export-Csv DSCDMZNEW.csv -NoTypeInformation
+Import-Csv Credential_Scan_-_Housing*.csv | Select-Object *,@{Name='Scan';Expression={'Housing'}} | Export-Csv HousingNEW.csv -NoTypeInformation
+Import-Csv Credential_Scan_-_Midrange*.csv | Select-Object *,@{Name='Scan';Expression={'Midrange'}} | Export-Csv MidrangeNEW.csv -NoTypeInformation
+Del Credential_Scan*.csv
+$HoldCSV = Get-ChildItem -Filter *.csv | Select-Object -ExpandProperty FullName | Import-Csv;
+$HoldCSV | Export-Csv .\CurrentServer.csv -NoTypeInformation -Append
